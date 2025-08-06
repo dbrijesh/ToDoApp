@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend/TodoApi
+      dockerfile: Dockerfile
+    container_name: todo-backend-dev
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+      - AzureAd__Instance=https://login.microsoftonline.com/
+      - AzureAd__Domain=52451440-c2a9-442f-8c20-8562d49f6846
+      - AzureAd__TenantId=52451440-c2a9-442f-8c20-8562d49f6846
+      - AzureAd__ClientId=01d37875-07ee-427e-8be5-594fbe4c5632
+    volumes:
+      - ./backend/TodoApi:/app/source
+    networks:
+      - todo-network-dev
+    restart: unless-stopped
+
+  frontend:
+    build: 
+      context: ./frontend/todo-app
+      dockerfile: Dockerfile
+    container_name: todo-frontend-dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend/todo-app/src:/app/src
+      - ./frontend/todo-app/public:/app/public
+    depends_on:
+      - backend
+    networks:
+      - todo-network-dev
+    restart: unless-stopped
+
+networks:
+  todo-network-dev:
+    driver: bridge
+    name: todo-app-network-dev

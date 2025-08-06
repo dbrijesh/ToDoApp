@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx @angular/cli@19 new:*)",
+      "Bash(npm install:*)",
+      "Bash(dotnet new:*)",
+      "Bash(ls:*)",
+      "Bash(wget:*)",
+      "Bash(sudo dpkg:*)",
+      "Bash(rm:*)",
+      "Bash(chmod:*)",
+      "Bash(./scripts/start-dev.sh:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker:*)",
+      "Bash(docker-compose:*)",
+      "Bash(curl:*)",
+      "Bash(npm start)",
+      "Bash(npx ng serve:*)",
+      "Bash(timeout 30 tail -f frontend.log)",
+      "Bash(find:*)",
+      "Bash(npm run build:*)"
+    ],
+    "deny": []
+  }
+}

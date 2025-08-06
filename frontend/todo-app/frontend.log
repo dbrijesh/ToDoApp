@@ -1,0 +1,580 @@
+
+> todo-app@0.0.0 start
+> ng serve
+
+Component HMR has been enabled, see https://angular.dev/hmr for more info.
+❯ Building...
+✔ Building...
+Initial chunk files | Names         |  Raw size
+polyfills.js        | polyfills     |  89.77 kB | 
+main.js             | main          |  50.19 kB | 
+styles.css          | styles        |  95 bytes | 
+
+                    | Initial total | 140.06 kB
+
+Application bundle generation complete. [7.838 seconds]
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  ➜  Local:   http://localhost:4200/
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [1.810 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'removeAccount' does not exist on type 'IPublicClientApplication'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.component.ts:110:32:
+[37m      110 │       this.authService.instance.[32mremoveAccount[37m(account);
+          ╵                                 [32m~~~~~~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names         |  Raw size
+polyfills.js        | polyfills     |  89.77 kB | 
+main.js             | main          |  50.35 kB | 
+styles.css          | styles        |  95 bytes | 
+
+                    | Initial total | 140.22 kB
+
+Application bundle generation complete. [1.676 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 50.40 kB | 
+
+Application bundle generation complete. [1.064 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 50.61 kB | 
+
+Application bundle generation complete. [1.103 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 51.37 kB | 
+
+Application bundle generation complete. [1.385 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 51.36 kB | 
+
+Application bundle generation complete. [0.992 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 51.35 kB | 
+
+Application bundle generation complete. [0.288 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 51.41 kB | 
+
+Application bundle generation complete. [0.507 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 51.44 kB | 
+
+Application bundle generation complete. [1.455 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [1.023 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'accessToken' does not exist on type 'Observable<void>'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.component.ts:201:45:
+[37m      201 │           if (tokenResponse && tokenResponse.[32maccessToken[37m) {
+          ╵                                              [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'accessToken' does not exist on type 'Observable<void>'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.component.ts:204:55:
+[37m      204 │ ...          'Authorization': `Bearer ${tokenResponse.[32maccessToken[37m}`,
+          ╵                                                       [32m~~~~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.263 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'accessToken' does not exist on type 'Observable<void>'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.component.ts:201:45:
+[37m      201 │           if (tokenResponse && tokenResponse.[32maccessToken[37m) {
+          ╵                                              [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'accessToken' does not exist on type 'Observable<void>'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.component.ts:204:55:
+[37m      204 │ ...          'Authorization': `Bearer ${tokenResponse.[32maccessToken[37m}`,
+          ╵                                                       [32m~~~~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names         |  Raw size
+polyfills.js        | polyfills     |  89.77 kB | 
+main.js             | main          |  50.91 kB | 
+styles.css          | styles        |  95 bytes | 
+
+                    | Initial total | 140.77 kB
+
+Application bundle generation complete. [0.789 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 50.92 kB | 
+
+Application bundle generation complete. [1.031 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 50.93 kB | 
+
+Application bundle generation complete. [0.322 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 51.14 kB | 
+
+Application bundle generation complete. [0.993 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.298 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2353: Object literal may only specify known properties, and 'allowNativeBroker' does not exist in type 'BrowserSystemOptions'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.config.ts:48:6:
+[37m      48 │       [32mallowNativeBroker[37m: false
+         ╵       [32m~~~~~~~~~~~~~~~~~[0m
+
+  The expected type comes from property 'system' which is declared here on type 'Configuration'
+
+    node_modules/@azure/msal-browser/dist/config/Configuration.d.ts:205:4:
+[37m      205 │     [32msystem[37m?: BrowserSystemOptions;
+          ╵     [32m~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names         |  Raw size
+polyfills.js        | polyfills     |  89.77 kB | 
+main.js             | main          |  51.30 kB | 
+styles.css          | styles        |  95 bytes | 
+
+                    | Initial total | 141.17 kB
+
+Application bundle generation complete. [0.455 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 51.55 kB | 
+
+Application bundle generation complete. [6.582 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 51.91 kB | 
+
+Application bundle generation complete. [1.526 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 52.47 kB | 
+
+Application bundle generation complete. [19.335 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 53.42 kB | 
+
+Application bundle generation complete. [0.911 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 54.94 kB | 
+
+Application bundle generation complete. [0.842 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 55.29 kB | 
+
+Application bundle generation complete. [0.938 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 55.34 kB | 
+
+Application bundle generation complete. [0.156 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 55.23 kB | 
+
+Application bundle generation complete. [0.129 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 55.22 kB | 
+
+Application bundle generation complete. [0.192 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 55.39 kB | 
+
+Application bundle generation complete. [0.755 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.675 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'getAccountsCount' does not exist on type 'AppComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.component.html:127:27:
+[37m      127 │     <div>Accounts Count: {{[32mgetAccountsCount[37m()}}</div>
+          ╵                            [32m~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AppComponent.
+
+    src/app/app.component.ts:22:15:
+[37m      22 │   templateUrl: [32m'./app.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'getActiveAccountName' does not exist on type 'AppComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.component.html:128:27:
+[37m      128 │     <div>Active Account: {{[32mgetActiveAccountName[37m()}}</div>
+          ╵                            [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AppComponent.
+
+    src/app/app.component.ts:22:15:
+[37m      22 │   templateUrl: [32m'./app.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'debugRefresh' does not exist on type 'AppComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.component.html:129:21:
+[37m      129 │     <button (click)="[32mdebugRefresh[37m()" style="margin-top: 5px; padd...
+          ╵                      [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AppComponent.
+
+    src/app/app.component.ts:22:15:
+[37m      22 │   templateUrl: [32m'./app.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names         |  Raw size
+polyfills.js        | polyfills     |  89.77 kB | 
+main.js             | main          |  57.22 kB | 
+styles.css          | styles        |  95 bytes | 
+
+                    | Initial total | 147.08 kB
+
+Application bundle generation complete. [0.780 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.23 kB | 
+
+Application bundle generation complete. [0.303 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.29 kB | 
+
+Application bundle generation complete. [0.165 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.23 kB | 
+
+Application bundle generation complete. [0.136 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+
+No output file changes.
+
+Application bundle generation complete. [0.854 seconds]
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.38 kB | 
+
+Application bundle generation complete. [0.769 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.58 kB | 
+
+Application bundle generation complete. [0.613 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.76 kB | 
+
+Application bundle generation complete. [0.639 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.93 kB | 
+
+Application bundle generation complete. [0.176 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.76 kB | 
+
+Application bundle generation complete. [0.230 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.81 kB | 
+
+Application bundle generation complete. [0.227 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.80 kB | 
+
+Application bundle generation complete. [0.832 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 58.63 kB | 
+
+Application bundle generation complete. [0.758 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 58.74 kB | 
+
+Application bundle generation complete. [0.182 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 57.41 kB | 
+
+Application bundle generation complete. [0.983 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 54.59 kB | 
+
+Application bundle generation complete. [1.002 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 54.23 kB | 
+
+Application bundle generation complete. [0.943 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 54.18 kB | 
+
+Application bundle generation complete. [0.729 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 53.13 kB | 
+
+Application bundle generation complete. [0.869 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 53.08 kB | 
+
+Application bundle generation complete. [0.775 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 53.15 kB | 
+
+Application bundle generation complete. [1.147 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 52.85 kB | 
+
+Application bundle generation complete. [0.365 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+
+No output file changes.
+
+Application bundle generation complete. [0.297 seconds]
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 52.91 kB | 
+
+Application bundle generation complete. [0.795 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 53.13 kB | 
+
+Application bundle generation complete. [0.633 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 53.89 kB | 
+
+Application bundle generation complete. [0.936 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 53.87 kB | 
+
+Application bundle generation complete. [1.005 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 54.25 kB | 
+
+Application bundle generation complete. [0.740 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 55.04 kB | 
+
+Application bundle generation complete. [0.736 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 55.07 kB | 
+
+Application bundle generation complete. [0.803 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 54.98 kB | 
+
+Application bundle generation complete. [0.804 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 54.93 kB | 
+
+Application bundle generation complete. [0.900 seconds]
+
+Component update sent to client(s).

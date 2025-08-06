@@ -1,0 +1,126 @@
+<div class="app-container" [class.initializing]="isInitializing">
+  <!-- Loading State - Show during initialization -->
+  <div class="loading-state" *ngIf="isInitializing && !isIframe">
+    <p>Loading...</p>
+  </div>
+
+  <!-- Authentication Section -->
+  <div class="auth-section" *ngIf="!isIframe">
+    <div class="header">
+      <h1>TODO Application</h1>
+      <div class="auth-buttons">
+        <button *ngIf="!loginDisplay" (click)="login()" class="login-btn">
+          Sign in with Azure
+        </button>
+        <div *ngIf="loginDisplay" class="user-info">
+          <div class="user-profile">
+            <span class="user-name">{{userProfile?.name}}</span>
+            <span class="user-email">{{userProfile?.email}}</span>
+          </div>
+          <button (click)="logout()" class="logout-btn">Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODO Application -->
+  <div class="todo-container" *ngIf="loginDisplay">
+    <!-- Add New TODO -->
+    <div class="add-todo-section">
+      <h2>Add New TODO</h2>
+      <form (ngSubmit)="addTodo()" class="todo-form">
+        <input 
+          type="text" 
+          [(ngModel)]="newTodo.title" 
+          name="title"
+          placeholder="Enter TODO title" 
+          class="todo-input"
+          required>
+        <textarea 
+          [(ngModel)]="newTodo.description" 
+          name="description"
+          placeholder="Enter TODO description" 
+          class="todo-textarea"
+          rows="3"></textarea>
+        <button type="submit" class="add-btn" [disabled]="!newTodo.title.trim()">
+          Add TODO
+        </button>
+      </form>
+    </div>
+
+    <!-- TODO List -->
+    <div class="todo-list-section">
+      <h2>Your TODOs ({{todos.length}})</h2>
+      
+      <div *ngIf="todos.length === 0" class="empty-state">
+        <p>No TODOs yet. Add your first TODO above!</p>
+      </div>
+
+      <div class="todo-list" *ngIf="todos.length > 0">
+        <div *ngFor="let todo of todos" class="todo-item" [class.completed]="todo.isCompleted">
+          <!-- View Mode -->
+          <div *ngIf="editingTodo?.id !== todo.id" class="todo-view">
+            <div class="todo-checkbox">
+              <input 
+                type="checkbox" 
+                [checked]="todo.isCompleted" 
+                (change)="toggleComplete(todo)"
+                [id]="'todo-' + todo.id">
+              <label [for]="'todo-' + todo.id"></label>
+            </div>
+            <div class="todo-content">
+              <h3 class="todo-title" [class.completed-text]="todo.isCompleted">{{todo.title}}</h3>
+              <p class="todo-description" *ngIf="todo.description">{{todo.description}}</p>
+              <div class="todo-dates">
+                <small>Created: {{todo.createdDate | date:'short'}}</small>
+                <small *ngIf="todo.updatedDate !== todo.createdDate">
+                  Updated: {{todo.updatedDate | date:'short'}}
+                </small>
+              </div>
+            </div>
+            <div class="todo-actions">
+              <button (click)="editTodo(todo)" class="edit-btn" [disabled]="todo.isCompleted">
+                Edit
+              </button>
+              <button (click)="deleteTodo(todo.id)" class="delete-btn">
+                Delete
+              </button>
+            </div>
+          </div>
+
+          <!-- Edit Mode -->
+          <div *ngIf="editingTodo?.id === todo.id" class="todo-edit">
+            <form (ngSubmit)="updateTodo()" class="edit-form">
+              <input 
+                type="text" 
+                [(ngModel)]="editingTodo!.title" 
+                name="editTitle"
+                class="todo-input"
+                required>
+              <textarea 
+                [(ngModel)]="editingTodo!.description" 
+                name="editDescription"
+                class="todo-textarea"
+                rows="3"></textarea>
+              <div class="edit-actions">
+                <button type="submit" class="save-btn" [disabled]="!editingTodo!.title.trim()">
+                  Save
+                </button>
+                <button type="button" (click)="cancelEdit()" class="cancel-btn">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Not Authenticated State -->
+  <div class="loading-state" *ngIf="!loginDisplay && !isIframe && !isInitializing">
+    <p>Please sign in to access your TODOs</p>
+  </div>
+</div>
+
+<router-outlet />

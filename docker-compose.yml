@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend/TodoApi
+      dockerfile: Dockerfile
+    container_name: todo-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5000
+      - AWS__Region=us-east-1
+      - AWS__UserPoolId=us-east-1_aibygKCIA
+      - AWS__AppClientId=6iv9saf42n4aft5pverjpjpaq6
+    networks:
+      - todo-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build: 
+      context: ./frontend/todo-app
+      dockerfile: Dockerfile
+    container_name: todo-frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    networks:
+      - todo-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4200"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  todo-network:
+    driver: bridge
+    name: todo-app-network
+
+# Optional: Add volumes for persistent data (if switching from in-memory storage)
+# volumes:
+#   todo-data:
+#     driver: local

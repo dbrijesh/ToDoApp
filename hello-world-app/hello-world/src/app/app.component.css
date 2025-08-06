@@ -1,0 +1,19 @@
+.hello-world {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.hello-world h1 {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.hello-world p {
+  font-size: 1.2rem;
+  color: #666;
+}
