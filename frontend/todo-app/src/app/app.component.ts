@@ -93,6 +93,25 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Initiates NAM-SAML IDP-initiated authentication
+   */
+  async loginWithNAM() {
+    if (this.loginInProgress) {
+      return;
+    }
+
+    this.loginInProgress = true;
+
+    try {
+      // For IDP-initiated login, redirect directly to NAM SSO URL
+      window.location.href = 'https://access.webdev.bank.com/cognitosso';
+    } catch (error) {
+      console.error('NAM login error:', error);
+      this.loginInProgress = false;
+    }
+  }
+
+  /**
    * Logs out the user
    */
   async logout() {
