@@ -12,6 +12,9 @@
         <button *ngIf="!loginDisplay" (click)="login()" class="login-btn">
           Sign in with Azure
         </button>
+        <button *ngIf="!loginDisplay" (click)="loginWithNAM()" class="nam-login-btn">
+          Sign in with NAM
+        </button>
         <div *ngIf="loginDisplay" class="user-info">
           <div class="user-profile">
             <span class="user-name">{{userProfile?.name}}</span>
