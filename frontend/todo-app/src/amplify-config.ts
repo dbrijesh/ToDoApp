@@ -10,7 +10,11 @@ export const amplifyConfig = {
           scopes: ['openid'],
           redirectSignIn: ['http://localhost:4200/'],
           redirectSignOut: ['http://localhost:4200/'],
-          responseType: 'code' as const
+          responseType: 'code' as const,
+          providers: [
+            { custom: 'AzureSAML' },
+            { custom: 'NAM-SAML' }
+          ]
         }
       }
     }
