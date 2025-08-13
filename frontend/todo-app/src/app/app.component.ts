@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import { RouterOutlet, Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Amplify } from 'aws-amplify';
-import { getCurrentUser, signInWithRedirect, signOut, fetchAuthSession } from 'aws-amplify/auth';
+import { getCurrentUser, signInWithRedirect, signOut, fetchAuthSession, confirmSignIn } from 'aws-amplify/auth';
 import { amplifyConfig } from '../amplify-config';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -39,7 +39,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     // Configure Amplify
     Amplify.configure(amplifyConfig);
@@ -50,6 +51,15 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   async ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
+    
+    // Check for authorization code from NAM IDP-initiated login
+    this.activatedRoute.queryParams.subscribe(async params => {
+      if (params['code'] && params['state']) {
+        console.log('Authorization code received from NAM:', params['code']);
+        await this.handleAuthorizationCode(params['code'], params['state']);
+        return;
+      }
+    });
     
     try {
       // Check if user is already authenticated
@@ -108,6 +118,99 @@ export class AppComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.error('NAM login error:', error);
       this.loginInProgress = false;
+    }
+  }
+
+  /**
+   * Handles authorization code received from NAM IDP-initiated login
+   */
+  async handleAuthorizationCode(code: string, state: string) {
+    try {
+      console.log('Processing authorization code...');
+      this.isInitializing = true;
+
+      // Exchange authorization code for tokens via Cognito
+      const tokenEndpoint = `https://${amplifyConfig.Auth.Cognito.loginWith.oauth.domain}/oauth2/token`;
+      
+      const tokenRequest = {
+        grant_type: 'authorization_code',
+        client_id: amplifyConfig.Auth.Cognito.userPoolClientId,
+        code: code,
+        redirect_uri: amplifyConfig.Auth.Cognito.loginWith.oauth.redirectSignIn[0]
+      };
+
+      const tokenResponse = await fetch(tokenEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams(tokenRequest)
+      });
+
+      if (!tokenResponse.ok) {
+        throw new Error(`Token exchange failed: ${tokenResponse.statusText}`);
+      }
+
+      const tokens = await tokenResponse.json();
+      console.log('Tokens received successfully');
+
+      // Set tokens in Amplify session
+      await this.setAmplifyTokens(tokens);
+
+      // Get user information
+      const user = await getCurrentUser();
+      console.log('NAM user authenticated:', user);
+
+      this.userProfile = {
+        name: user.username,
+        email: user.signInDetails?.loginId || user.username
+      };
+      this.loginDisplay = true;
+      this.loginInProgress = false;
+
+      // Clean up URL parameters
+      this.router.navigate([], {
+        relativeTo: this.activatedRoute,
+        queryParams: {},
+        replaceUrl: true
+      });
+
+      // Load user's todos
+      this.loadTodos();
+
+    } catch (error) {
+      console.error('Error handling authorization code:', error);
+      this.loginInProgress = false;
+      // You might want to show an error message to the user
+    } finally {
+      this.isInitializing = false;
+    }
+  }
+
+  /**
+   * Sets tokens in Amplify session storage
+   */
+  private async setAmplifyTokens(tokens: any) {
+    try {
+      // Store tokens in session storage for Amplify to use
+      const tokenKey = `CognitoIdentityServiceProvider.${amplifyConfig.Auth.Cognito.userPoolClientId}`;
+      const userKey = `${tokenKey}.LastAuthUser`;
+      
+      if (tokens.access_token) {
+        sessionStorage.setItem(`${tokenKey}.${tokens.username || 'nam-user'}.accessToken`, tokens.access_token);
+      }
+      if (tokens.id_token) {
+        sessionStorage.setItem(`${tokenKey}.${tokens.username || 'nam-user'}.idToken`, tokens.id_token);
+      }
+      if (tokens.refresh_token) {
+        sessionStorage.setItem(`${tokenKey}.${tokens.username || 'nam-user'}.refreshToken`, tokens.refresh_token);
+      }
+      
+      sessionStorage.setItem(userKey, tokens.username || 'nam-user');
+      
+      console.log('Tokens stored in session storage');
+    } catch (error) {
+      console.error('Error setting Amplify tokens:', error);
     }
   }
 
