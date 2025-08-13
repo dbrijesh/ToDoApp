@@ -77,6 +77,22 @@
   transform: translateY(-1px);
 }
 
+.nam-login-btn {
+  background: var(--white);
+  color: var(--brand-primary);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nam-login-btn:hover {
+  background: var(--light-gray);
+  transform: translateY(-1px);
+}
+
 .user-info {
   display: flex;
   align-items: center;
