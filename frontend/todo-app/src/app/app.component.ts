@@ -54,9 +54,9 @@ export class AppComponent implements OnInit, OnDestroy {
     
     // Check for authorization code from NAM IDP-initiated login
     this.activatedRoute.queryParams.subscribe(async params => {
-      if (params['code'] && params['state']) {
+      if (params['code']) {
         console.log('Authorization code received from NAM:', params['code']);
-        await this.handleAuthorizationCode(params['code'], params['state']);
+        await this.handleAuthorizationCode(params['code'], params['state'] || '');
         return;
       }
     });
@@ -124,7 +124,7 @@ export class AppComponent implements OnInit, OnDestroy {
   /**
    * Handles authorization code received from NAM IDP-initiated login
    */
-  async handleAuthorizationCode(code: string, state: string) {
+  async handleAuthorizationCode(code: string, state?: string) {
     try {
       console.log('Processing authorization code...');
       this.isInitializing = true;
@@ -192,25 +192,71 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   private async setAmplifyTokens(tokens: any) {
     try {
-      // Store tokens in session storage for Amplify to use
+      console.log('Token response:', tokens);
+      
+      // Parse the ID token to get user information
+      let username = 'nam-user';
+      if (tokens.id_token) {
+        try {
+          const payload = JSON.parse(atob(tokens.id_token.split('.')[1]));
+          username = payload.sub || payload['cognito:username'] || payload.email || 'nam-user';
+          console.log('Extracted username from ID token:', username);
+        } catch (e) {
+          console.warn('Could not parse ID token:', e);
+        }
+      }
+
+      // Store tokens in localStorage (more reliable than sessionStorage for Amplify)
       const tokenKey = `CognitoIdentityServiceProvider.${amplifyConfig.Auth.Cognito.userPoolClientId}`;
       const userKey = `${tokenKey}.LastAuthUser`;
       
+      // Set the last auth user
+      localStorage.setItem(userKey, username);
+      
+      // Store tokens with proper keys
       if (tokens.access_token) {
-        sessionStorage.setItem(`${tokenKey}.${tokens.username || 'nam-user'}.accessToken`, tokens.access_token);
+        localStorage.setItem(`${tokenKey}.${username}.accessToken`, tokens.access_token);
       }
       if (tokens.id_token) {
-        sessionStorage.setItem(`${tokenKey}.${tokens.username || 'nam-user'}.idToken`, tokens.id_token);
+        localStorage.setItem(`${tokenKey}.${username}.idToken`, tokens.id_token);
       }
       if (tokens.refresh_token) {
-        sessionStorage.setItem(`${tokenKey}.${tokens.username || 'nam-user'}.refreshToken`, tokens.refresh_token);
+        localStorage.setItem(`${tokenKey}.${username}.refreshToken`, tokens.refresh_token);
       }
       
-      sessionStorage.setItem(userKey, tokens.username || 'nam-user');
+      // Store token type and expiry
+      if (tokens.token_type) {
+        localStorage.setItem(`${tokenKey}.${username}.tokenType`, tokens.token_type);
+      }
+      if (tokens.expires_in) {
+        const expiryTime = Date.now() + (tokens.expires_in * 1000);
+        localStorage.setItem(`${tokenKey}.${username}.clockDrift`, '0');
+      }
       
-      console.log('Tokens stored in session storage');
+      console.log('Tokens stored in localStorage with username:', username);
+      
+      // Force Amplify to reload the session
+      await this.reloadAmplifySession();
+      
     } catch (error) {
       console.error('Error setting Amplify tokens:', error);
+    }
+  }
+
+  /**
+   * Reload Amplify session to recognize new tokens
+   */
+  private async reloadAmplifySession() {
+    try {
+      // Clear any cached session
+      const { Amplify } = await import('aws-amplify');
+      
+      // Re-configure Amplify to pick up new tokens
+      Amplify.configure(amplifyConfig);
+      
+      console.log('Amplify session reloaded');
+    } catch (error) {
+      console.error('Error reloading Amplify session:', error);
     }
   }
 
