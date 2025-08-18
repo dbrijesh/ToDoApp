@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Amplify } from 'aws-amplify';
 import { getCurrentUser, signInWithRedirect, signOut, fetchAuthSession, confirmSignIn } from 'aws-amplify/auth';
-import { amplifyConfig } from '../amplify-config';
+import { amplifyConfig, getClientIdForProvider, detectProviderFromToken } from '../amplify-config';
 import { Subject, takeUntil } from 'rxjs';
 
 interface TodoItem {
@@ -129,12 +129,17 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('Processing authorization code...');
       this.isInitializing = true;
 
+      // Determine provider based on the source (NAM uses IDP-initiated flow)
+      const provider = 'NAM-SAML';
+      const clientId = getClientIdForProvider(provider);
+      console.log(`Using client ID for ${provider}:`, clientId);
+
       // Exchange authorization code for tokens via Cognito
       const tokenEndpoint = `https://${amplifyConfig.Auth.Cognito.loginWith.oauth.domain}/oauth2/token`;
       
       const tokenRequest = {
         grant_type: 'authorization_code',
-        client_id: amplifyConfig.Auth.Cognito.userPoolClientId,
+        client_id: clientId,
         code: code,
         redirect_uri: amplifyConfig.Auth.Cognito.loginWith.oauth.redirectSignIn[0]
       };
@@ -155,7 +160,7 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('Tokens received successfully');
 
       // Set tokens in Amplify session
-      await this.setAmplifyTokens(tokens);
+      await this.setAmplifyTokens(tokens, provider);
 
       // Get user information
       const user = await getCurrentUser();
@@ -190,16 +195,23 @@ export class AppComponent implements OnInit, OnDestroy {
   /**
    * Sets tokens in Amplify session storage
    */
-  private async setAmplifyTokens(tokens: any) {
+  private async setAmplifyTokens(tokens: any, provider?: string) {
     try {
       console.log('Token response:', tokens);
       
+      // Detect provider from token if not explicitly provided
+      if (!provider && tokens.id_token) {
+        provider = detectProviderFromToken(tokens.id_token);
+        console.log('Detected provider from token:', provider);
+      }
+      provider = provider || 'default';
+      
       // Parse the ID token to get user information
-      let username = 'nam-user';
+      let username = 'default-user';
       if (tokens.id_token) {
         try {
           const payload = JSON.parse(atob(tokens.id_token.split('.')[1]));
-          username = payload.sub || payload['cognito:username'] || payload.email || 'nam-user';
+          username = payload.sub || payload['cognito:username'] || payload.email || 'default-user';
           console.log('Extracted username from ID token:', username);
         } catch (e) {
           console.warn('Could not parse ID token:', e);
@@ -207,7 +219,9 @@ export class AppComponent implements OnInit, OnDestroy {
       }
 
       // Store tokens in localStorage (more reliable than sessionStorage for Amplify)
-      const tokenKey = `CognitoIdentityServiceProvider.${amplifyConfig.Auth.Cognito.userPoolClientId}`;
+      const clientId = getClientIdForProvider(provider);
+      const tokenKey = `CognitoIdentityServiceProvider.${clientId}`;
+      console.log(`Using client ID for ${provider}:`, clientId);
       const userKey = `${tokenKey}.LastAuthUser`;
       
       // Set the last auth user
